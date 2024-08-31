@@ -1,0 +1,82 @@
+CREATE DATABASE myshop; /*membuatdatabase*/
+USE myshop;
+DROP DATABASE myshop;
+
+/*soal 2*/
+CREATE TABLE users(
+    users_ID INT PRIMARY KEY,
+    users_name CHAR(90),
+    email CHAR(50) NOT NULL,
+    PASSWORD VARCHAR(40)
+);
+
+CREATE TABLE categories(
+categories_id INT PRIMARY KEY,
+categories_name VARCHAR (255)
+);
+  
+
+CREATE TABLE items (
+    id INT PRIMARY KEY,
+    nama_items VARCHAR(255),
+    description VARCHAR(255),
+    price INTEGER,
+    stock INTEGER,
+    categories_id INTEGER,
+    FOREIGN KEY (categories_id) REFERENCES categories(categories_id)
+);
+/*soal 3*/
+
+DROP TABLE products;
+INSERT INTO users (users_ID, users_name, email, PASSWORD) VALUES (1, 'John Doe', 'john@doe.com', 'john123');
+INSERT INTO users (users_ID, users_name, email, PASSWORD) VALUES (2, 'Jane Doe', 'jane@doe.com', 'jenita123');
+
+INSERT INTO categories (categories_id, categories_name) VALUES (1, 'gadget');
+INSERT INTO categories (categories_id, categories_name) VALUES (2, 'cloth');
+INSERT INTO categories (categories_id, categories_name) VALUES (3, 'men');
+INSERT INTO categories (categories_id, categories_name) VALUES (4, 'women');
+INSERT INTO categories (categories_id, categories_name) VALUES (5, 'branded');
+
+INSERT INTO items (id, nama_items, description, price, stock, categories_id)
+VALUES
+(1, 'Sumsang b50', 'hape keren dari merek sumsang', 4000000, 100, 1),
+(2, 'Uniklooh', 'baju keren dari brand ternama', 500000, 50, 2),
+(3, 'IMHO Watch', 'jam tangan anak yang jujur banget', 2000000, 10, 1);
+
+
+SHOW TABLE categories;
+SELECT * FROM users;
+SELECT * FROM categories;
+SELECT * FROM products;
+SELECT * FROM items;
+
+/*soal no 4*/
+SELECT users_ID, users_name, email FROM users;
+SELECT * FROM items WHERE price = 1000000;
+SELECT * FROM items WHERE nama_items LIKE "uniklooh";
+SELECT 
+    items.nama_items, 
+    items.description, 
+    items.price, 
+    items.stock, 
+    categories.categories_name,
+    categories.categories_id
+FROM 
+    items
+JOIN 
+    categories 
+ON 
+    items.categories_id = categories.categories_id;
+
+/*soal 5*/
+UPDATE items
+SET price = 2500000
+WHERE nama_items = 'Sumsang b50';
+
+
+
+
+
+
+
+
